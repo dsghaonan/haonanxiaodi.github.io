@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="机器学习神经网络 10‘ 贝叶斯 20’ 聚类 10‘ 支持向量机 20’ 线性核 10‘ 基本概念 30’ 填空15’、选择20‘、判断10’（写T和F）、简答20‘ 3、问答15’ 2、计算分析题20‘ 第一章 机器学习的概念  机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。在计算机系统中，“经验”通常以“数据”形式存在。  机器学习的主要研究内容  是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习期末复习提纲">
+<meta property="og:url" content="http://yoursite.com/2019/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/index.html">
+<meta property="og:site_name" content="Haonan">
+<meta property="og:description" content="机器学习神经网络 10‘ 贝叶斯 20’ 聚类 10‘ 支持向量机 20’ 线性核 10‘ 基本概念 30’ 填空15’、选择20‘、判断10’（写T和F）、简答20‘ 3、问答15’ 2、计算分析题20‘ 第一章 机器学习的概念  机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。在计算机系统中，“经验”通常以“数据”形式存在。  机器学习的主要研究内容  是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/nKUyyll41O2l.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/Q3571thhLqWU.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/EODIS85LTc7l.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/swh5m4nQA6Lh.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/niGIrU2FuNLB.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/XYk9f6EjUI53.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/r05zvWfErtAR.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/v91iXLYW4vBk.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/p0pl5JqdOxX6.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/rKiQ8H9RJT8X.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/vqiIINS5xy2i.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/hCg18Ct9p3x9.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/QxD7UFGToAa0.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/FI9OGFSND1Cq.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/P9FJ43FItPFm.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/P4tCEHIJaW8R.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/hFOkmR4wV9Qx.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/r2Eem2NtklR7.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/Pxsepqh4u7eC.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/I0gtNzaD124e.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/TpwvOXU6S4Ry.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/WIfPckPuedCM.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/h63Q3f1Hwjil.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/4jjBTGf5dbBe.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/5aW4dQ1sbbw6.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/bLORjHlwWN6v.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/ICLYnHkP9mXi.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/7glDEMcbdeNG.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/agVXLfgtQfvL.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/Ey4SgX5libVT.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/YeoRtrE9ATDH.png?imageslim">
+<meta property="og:image" content="http://img.guohaonan.cn/blog/20200216/qSlisWEaCitF.png?imageslim">
+<meta property="article:published_time" content="2019-05-29T02:31:32.000Z">
+<meta property="article:modified_time" content="2020-02-16T02:32:40.281Z">
+<meta property="article:author" content="浩楠小弟">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.guohaonan.cn/blog/20200216/nKUyyll41O2l.png?imageslim">
+
+<link rel="canonical" href="http://yoursite.com/2019/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>机器学习期末复习提纲 | Haonan</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Haonan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="浩楠小弟">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haonan">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习期末复习提纲
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-29 10:31:32" itemprop="dateCreated datePublished" datetime="2019-05-29T10:31:32+08:00">2019-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/2016-2020%E9%87%91%E9%99%B5%E7%A7%91%E6%8A%80%E5%AD%A6%E9%99%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">2016-2020金陵科技学院</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h3><p>神经网络 10‘ 贝叶斯 20’ 聚类 10‘ 支持向量机 20’ 线性核 10‘ 基本概念 30’</p>
+<p>填空15’、选择20‘、判断10’（写T和F）、简答20‘ 3、问答15’ 2、计算分析题20‘</p>
+<h4 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h4><ul>
+<li>机器学习的概念</li>
+</ul>
+<p>机器学习是这样一门学科，它致力于研究如何通过<u>计算</u>的手段，利用<u>经验</u>来改善系统自身的性能。在计算机系统中，“<u>经验</u>”通常以“<u>数据</u>”形式存在。</p>
+<ul>
+<li>机器学习的主要研究内容</li>
+</ul>
+<p>是关于在计算机上从数据中产生“模型”的算法，即“学习算法”。</p>
+<ul>
+<li>什么叫做学习（P2）</li>
+</ul>
+<p>从数据中学得模型的过程称为“学习”(learning)或“训练”(training)，这个过程通过执行某个学习算法来完成。训练过程中使用的数据称为“训练数据”(training data)，其中每个样本称为一个“训练样本”(training sample)，训练样本组成的集合称为”训练集”(training set)。</p>
+<p>学得模型后，使用其进行预测的过程称为“测试”(testing)，被预测的样本称为”测试样本”(testing sample)。</p>
+<ul>
+<li>监督学习和非监督学习(P3)</li>
+</ul>
+<p>根据训练数据是否拥有标记信息，学习任务可大致划分为两大类：“<u>监督学习</u>”和“<u>无监督学习”</u>，分类和回归是前者的代表，而聚类则是后者的代表。除此之外，还有<u>强化学习</u>、半监督学习。</p>
+<ul>
+<li>常见的监督学习算法<ul>
+<li>Linear Regression</li>
+<li>Logistic Regression</li>
+<li>Support Vector Machines (SVMs)</li>
+</ul>
+</li>
+<li>常见的无监督学习算法<ul>
+<li>k-Means</li>
+</ul>
+</li>
+<li>回归和分类的区别(P3)<ul>
+<li>若预测的是离散值，例如“好瓜”“坏瓜”，此类学习任务称为“分类”(classification)；若欲预测的是连续值，例如西瓜成熟度0.95、0.37，此类学习任务称为“回归”(regression)。</li>
+</ul>
+</li>
+</ul>
+<p>判定西瓜是否为好瓜：分类问题；拟合二次曲线：回归问题；让机器下棋（阿尔法狗）：强化学习；</p>
+<ul>
+<li>独立同分布（P3）</li>
+</ul>
+<p>通常假设样本空间中全体样本服从一个未知“分布”(distribution)D，我们获得的每个样本都是独立地从这个分布上采样获得的，即”<u>独立同分布</u>“(independent and identically distributed)。</p>
+<ul>
+<li>奥卡姆剃刀(P7)<ul>
+<li>若有多个假设与观察一致，则选最简单的那个</li>
+<li>天下没有免费的午餐</li>
+</ul>
+</li>
+<li>发展历程(P10)<ul>
+<li>推理期：二十世纪五十年代到七十年代初</li>
+<li>知识期：二十世纪七十年代中期开始</li>
+<li>连接主义：二十世纪五十年代中后期</li>
+<li>符号主义：二十世纪六七十年代</li>
+<li>连接主义是什么时候开始的？</li>
+<li>50年代到70年代处于什么期？</li>
+<li>1986年，第一本机器学习专业期刊Machine Learning创刊</li>
+<li>2006年，卡耐基梅隆大学宣告成立世界上第一个“机器学习系”</li>
+</ul>
+</li>
+</ul>
+<h4 id="第二章-模型评估与选择"><a href="#第二章-模型评估与选择" class="headerlink" title="第二章 模型评估与选择"></a>第二章 模型评估与选择</h4><ul>
+<li>误差、精度、错误率、它俩之间的关系<ul>
+<li>错误率：分类错误的样本数占样本总数的比例</li>
+<li>精度：分类正确的样本数占样本总数的比例</li>
+<li>精度=1-错误率</li>
+<li>误差：学习器的实际预测输出与样本的真实输出之间的差异成为“误差”(error)。</li>
+</ul>
+</li>
+<li>经验误差、泛化误差、训练误差、测试误差、他们之间的关系、测试误差和泛化误差的区别<ul>
+<li>测试误差是在测试集上的误差，泛化误差不一定是测试集，由于我们不能测试尽所有的样本，就用测试误差用来近似泛化误差</li>
+<li>学习器在训练集上的误差称为“<u>训练误差</u>”(training error)或“<u>经验误差</u>”(empirical error)，在新样本上的误差称为“<u>泛化误差</u>”(generalization error)。</li>
+</ul>
+</li>
+<li>模型评估的时候用来测试模型的数据集叫做什么集？评估这个模型的性能组成的集合？<strong>B</strong> A训练集、B测试集、C评估集、D验证集</li>
+<li>留出法、分层采样（P25)<ul>
+<li>“留出法”直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集S，另一个作为测试集T。</li>
+<li>训练/测试集的划分要尽可能保持数据分布的一致性。例如通过对D进行分层采样而获得含70％样本的训练集S和含30％样本的测试集T，若D包含500个正例、500个反例，则分层采样得到的D应包含350个正例、350个反例，而T则包含150个正例、150个反例。</li>
+</ul>
+</li>
+<li><strong>交叉验证法</strong>  假设有一个数据集10类，用5折（或其他折）交叉验证评估模型，应该怎么分数据集？谁当训练集？谁当测试集？（大题）</li>
+<li>将这个数据集划分为5份，每份中包含各类的1/5的数据，每次用其中4份做训练集，剩余的1份做测试集，使每一份都做一次测试集，则一共5次训练/测试，最终结果取5次测试结果的均值</li>
+<li>将数据集D划分为k个大小相似的互斥子集。每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集，最终返回的是这k个测试结果的均值。k折交叉验证</li>
+<li>留一法<ul>
+<li>假定数据集D中包含m个样本，若令k=m，则得到了交叉验证法的一个特例：留一法(Leave-One-Out)。也即m个样本划分为m个子集，只有一种划分方法。</li>
+</ul>
+</li>
+<li>自助法<ul>
+<li>每次采样有一些样本永远不会采到：公式+数字</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/nKUyyll41O2l.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>查准率、查全率与F1</p>
+<ul>
+<li><p>以下四个选项哪个是查准率？哪个是查全率？</p>
+<p>查准率</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/Q3571thhLqWU.png?imageslim" alt="mark"></p>
+<p>​              查全率</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/EODIS85LTc7l.png?imageslim" alt="mark"></p>
+<ul>
+<li>P-R曲线</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/swh5m4nQA6Lh.png?imageslim" alt="mark"></p>
+<p>图中学习器A的性能比C好，面积大的性能好</p>
+<ul>
+<li>F1</li>
+</ul>
+<p>F1是基于查准率与查全率的调和平均定义的：</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/niGIrU2FuNLB.png?imageslim" alt="mark"></p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/XYk9f6EjUI53.png?imageslim" alt="mark"></p>
+<h4 id="第三章-线性模型"><a href="#第三章-线性模型" class="headerlink" title="第三章 线性模型"></a>第三章 线性模型</h4><ul>
+<li><p>线性模型的形式（填空题）</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/r05zvWfErtAR.png?imageslim" alt="mark"></p>
+</li>
+<li><p>线性回归(linear regression)是一个回归问题；对率回归（亦称逻辑回归）是一个分类问题。</p>
+</li>
+<li><p>对数线性回归 </p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/v91iXLYW4vBk.png?imageslim" alt="mark"></p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/p0pl5JqdOxX6.png?imageslim" alt="mark"></p>
+</li>
+<li><p>广义线性模型</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/rKiQ8H9RJT8X.png?imageslim" alt="mark"></p>
+</li>
+<li><p><strong>最小二乘法</strong>：怎么得到w和b的值，从头到尾的推导步骤（P54）</p>
+</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/vqiIINS5xy2i.png?imageslim" alt="mark"></p>
+<ul>
+<li>对率、几率 带e的形式  什么叫做对率 </li>
+<li>对数几率回归</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/hCg18Ct9p3x9.png?imageslim" alt="mark"></p>
+<ul>
+<li>几率：反映了x作为正例的相对可能性（y视为样本x作为正例的可能性，1-y是其反例可能性）</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/QxD7UFGToAa0.png?imageslim" alt="mark"></p>
+<ul>
+<li>对几率取对数得到“对数几率”</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/FI9OGFSND1Cq.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>线性判别分析（选择题）（P60） 聚类的过程是类内越来越紧凑，而类间越来越远</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/P9FJ43FItPFm.png?imageslim" alt="mark"></p>
+</li>
+<li><p>什么是线性模型，什么是非线性模型，给一堆数据，判断其是否线性可分（读图）</p>
+<ul>
+<li>该图上的两种数据是否能被一条直线划分，若能则为线性模型</li>
+</ul>
+</li>
+<li><p>多分类学习（P63）</p>
+<ul>
+<li>支持向量机和对率回归都是二类问题，如何将其变为多类<ul>
+<li>“一对一”(One vs. One)</li>
+<li>“一对其余”(One vs. Rest)</li>
+<li>这有一个多类问题，怎么用二类分类器将其判出来，应用多少种分类器<ul>
+<li>N类问题用“一对一”拆分需用N(N-1)/2种，而用“一对其余”拆分需用N种</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/P4tCEHIJaW8R.png?imageslim" alt="mark"></p>
+<h4 id="第四章-决策树"><a href="#第四章-决策树" class="headerlink" title="第四章 决策树"></a>第四章 决策树</h4><ul>
+<li><p>信息熵（P75） 熵的概念</p>
+<ul>
+<li><p>当一件事情有多种情况时，这件事情对某人而言具体是哪种情况的不确定性叫做熵</p>
+</li>
+<li><p>熵和信息数量相等，意义相反，获取信息意味着消除不确定性（熵）</p>
+</li>
+<li><p>信息熵用来衡量信息量的大小<br>若不确定性越大，则信息量越大，熵越大<br>若不确定性越小，则信息量越小，熵越小<br>比如A班对B班，胜率一个为x，另一个为1-x<br>则信息熵为 -(xlogx + (1-x)log(1-x))<br>求导后容易证明x=1/2时取得最大，最大值为2</p>
+<p>也就是说两者势均力敌时，不确定性最大，熵最大。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="第五章-神经网络"><a href="#第五章-神经网络" class="headerlink" title="第五章 神经网络"></a>第五章 神经网络</h4><ul>
+<li><p>给你一个神经网络 知道哪个是输入、输出、激励函数</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/hFOkmR4wV9Qx.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>激活函数</p>
+<ul>
+<li>阶跃函数sgn(x)、sigmoid(x)</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/r2Eem2NtklR7.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+</li>
+<li><p>感知机（P98）给一个感知机模型，让你把与或非或某个函数算出来（计算题）</p>
+</li>
+<li><p>将梯度下降法实现出来（描绘出来）</p>
+<ul>
+<li><p>LR</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/Pxsepqh4u7eC.png?imageslim" alt="mark"></p>
+</li>
+<li><pre><code class="c++"><span class="comment">//  1. 初始化</span>
+cv::Mat w0 = cv::Mat(<span class="number">1</span>, N, CV_64FC1);
+cv::RNG rng;
+cv::randu(w0, &amp;rng);
+
+<span class="comment">// 2. 迭代</span>
+   cv::Mat w = w0;
+   cv::Mat w_next = cv::Mat(<span class="number">1</span>,N, CV_64FC1);
+<span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>; k&lt;param.max_iterations; ++k)
+{
+    <span class="keyword">double</span> fw = ComputeFunctionValue(w);
+    <span class="keyword">double</span> gw = ComputeGradientValue(w);
+
+    w_next = w – param.eta * gw;
+    <span class="comment">//cv::Substract(w_next, w, param.eta*gw);</span>
+    <span class="comment">// 停机条件</span>
+    <span class="keyword">if</span> (Distance(w_next, w) &lt; param.eps_w) { <span class="keyword">break</span>; }
+    <span class="keyword">if</span> (Module(gw) &lt; param.eps_g) { <span class="keyword">break</span>; }
+    <span class="keyword">if</span> (Distance(fw_next, fw) &lt; param.eps_fw) {<span class="keyword">break</span>;}
+}
+
+<span class="comment">// 3. 输出</span>
+cv::Mat optimal_w = w;
+<span class="keyword">double</span> optimal_fw = fw;
+
+<span class="comment">// 4. 预测（测试）</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;N; ++i)
+{
+    <span class="keyword">if</span>(P1(x_i)&gt;<span class="number">0.5</span>) y_i = <span class="number">1</span>; <span class="keyword">else</span> y_i = <span class="number">0</span>;
+}
+
+&lt;!--￼<span class="number">0</span>--&gt;</code></pre>
+</li>
+<li><p>svm优化：SMO（P124）英文和中文</p>
+<ul>
+<li>中文：序列最小优化算法</li>
+<li>英文：Sequential Minimal Optimization</li>
+<li>支持向量机用SMO解</li>
+<li>神经网络用梯度下降法解</li>
+<li>线性回归：最小二乘法</li>
+<li>对率回归：梯度下降法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>什么叫做支持向量（P122）</p>
+<ul>
+<li>如图所示，距离超平面最近的这几个训练样本点使式子等号成立，它们被称为“支持向量”。</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/I0gtNzaD124e.png?imageslim" alt="mark"></p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/TpwvOXU6S4Ry.png?imageslim" alt="mark"></p>
+<h4 id="第七章-贝叶斯分类器"><a href="#第七章-贝叶斯分类器" class="headerlink" title="第七章 贝叶斯分类器"></a>第七章 贝叶斯分类器</h4><ul>
+<li>贝叶斯公式（P148）</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/WIfPckPuedCM.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>极大似然估计：不用乘用log，乘法会越乘越小，造成下溢；加法不会变没</p>
+</li>
+<li><p>贝叶斯学派、频率学派：极大似然估计源自频率主义学派</p>
+</li>
+<li><p>贝叶斯判定准则是什么？（P147）</p>
+<ul>
+<li><p>显然，对每个样本x，若h能最小化<strong>条件风险</strong>R(h(x)|x)，则<strong>总体风险</strong>R(h)也将被最小化。这就产生了<strong>贝叶斯判定准则</strong>：为最小化总体风险，只需在每个样本上选择那个能使条件风险R(c|x)最小的类别标记，即</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/h63Q3f1Hwjil.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+</li>
+<li><p>朴素贝叶斯分类器（大题）(P151)</p>
+<ul>
+<li>坑（P153）需要判别是否需要修正<ul>
+<li>简单的说，就是在你算的条件概率P(xi|c)中出现0时就需要进行修正</li>
+</ul>
+</li>
+<li>是和否的结果不相等</li>
+</ul>
+</li>
+</ul>
+<h4 id="第九章-聚类"><a href="#第九章-聚类" class="headerlink" title="第九章 聚类"></a>第九章 聚类</h4><ul>
+<li>什么叫距离 距离的性质</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/4jjBTGf5dbBe.png?imageslim" alt="mark"></p>
+<ul>
+<li><p>斯基的公式怎么写 特殊形式 p=1和p=2的形式 </p>
+</li>
+<li><p>闵可夫斯基距离</p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/5aW4dQ1sbbw6.png?imageslim" alt="mark"></p>
+<ul>
+<li>p=2时，化为欧式距离<img src="http://img.guohaonan.cn/blog/20200216/bLORjHlwWN6v.png?imageslim" alt="mark"></li>
+<li>p=1时，化为曼哈顿距离<img src="http://img.guohaonan.cn/blog/20200216/ICLYnHkP9mXi.png?imageslim" alt="mark"></li>
+<li>给个点算两个点之间的距离<ul>
+<li>曼哈顿距离：d(i,j)=|X1-X2|+|Y1-Y2|.</li>
+<li>欧式距离：<img src="http://img.guohaonan.cn/blog/20200216/7glDEMcbdeNG.png?imageslim" alt="mark"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>K均值算法的实现：给你一堆数据，把这个数据聚出几类，写出每步的步骤（P202）</p>
+<ul>
+<li>流程：将n个数分为k类，先初始化每类的均值，然后算每个数到各个均值的距离，将它归到距离最近的类中；接着更新每类的均值（一维中为平均数，二维中为重心，即n个数的x坐标平均值，以及y坐标平均值）；算每个数到新的均值的距离，将它归到距离最近的类中。不断迭代，直到每类的均值不再变化时，迭代停止。</li>
+<li>伪代码</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/agVXLfgtQfvL.png?imageslim" alt="mark"></p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/Ey4SgX5libVT.png?imageslim" alt="mark"></p>
+</li>
+</ul>
+<p><img src="http://img.guohaonan.cn/blog/20200216/YeoRtrE9ATDH.png?imageslim" alt="mark"></p>
+<p><img src="http://img.guohaonan.cn/blog/20200216/qSlisWEaCitF.png?imageslim" alt="mark"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="浩楠小弟 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="浩楠小弟 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tags"></i> 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/21/JavaEE%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E6%8F%90%E7%BA%B2/" rel="next" title="JavaEE期末复习提纲">
+      JavaEE期末复习提纲 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器学习"><span class="nav-number">1.</span> <span class="nav-text">机器学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一章"><span class="nav-number">1.1.</span> <span class="nav-text">第一章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二章-模型评估与选择"><span class="nav-number">1.2.</span> <span class="nav-text">第二章 模型评估与选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三章-线性模型"><span class="nav-number">1.3.</span> <span class="nav-text">第三章 线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四章-决策树"><span class="nav-number">1.4.</span> <span class="nav-text">第四章 决策树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五章-神经网络"><span class="nav-number">1.5.</span> <span class="nav-text">第五章 神经网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第七章-贝叶斯分类器"><span class="nav-number">1.6.</span> <span class="nav-text">第七章 贝叶斯分类器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第九章-聚类"><span class="nav-number">1.7.</span> <span class="nav-text">第九章 聚类</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="浩楠小弟"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">浩楠小弟</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/haonanxiaodi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;haonanxiaodi" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/haonan_@outlook.com" title="E-Mail → haonan_@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+	  
+	  <!-- 添加近期文章 -->
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+     <div class="links-of-blogroll-title">
+       <!-- modify icon to fire by szw -->
+      <i class="fa fa-history fa-" aria-hidden="true"></i>
+       近期文章
+     </div>
+     <ul class="links-of-blogroll-list">
+       
+       
+         <li>
+           <a href="/" title="" target="_blank"></a>
+         </li>
+       
+         <li>
+           <a href="/" title="" target="_blank"></a>
+         </li>
+       
+         <li>
+           <a href="/" title="" target="_blank"></a>
+         </li>
+       
+         <li>
+           <a href="/" title="" target="_blank"></a>
+         </li>
+       
+         <li>
+           <a href="/" title="" target="_blank"></a>
+         </li>
+       
+     </ul>
+   </div>
+ 
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">苏ICP备18054184号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">浩楠小弟</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'VuSN5F70xMR6z83jJX9B9hE4-gzGzoHsz',
+      appKey     : '2GBojstJso1hhkf6i1DojOp8',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
